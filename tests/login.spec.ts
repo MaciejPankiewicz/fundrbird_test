@@ -18,10 +18,7 @@ test.only('Successful login with default user', async ({ page }) => {
     page.locator('#home-legacy-header').getByText('Rolnopol'),
   ).toBeVisible();
   await loginPage.login(defaultUserEmail, defaultUserPassword);
-  await expect(loginPage.headerEmail).toHaveText(defaultUserEmail);
-  await expect(loginPage.headerName).toHaveText(defaultUserName);
-  await expect(loginPage.bodyName).toHaveText(defaultUserName);
-  await expect(loginPage.bodyEmail).toHaveText(defaultUserEmail);
+  await loginPage.checkLoggedInUser(defaultUserEmail, defaultUserName);
   await generalPage.logoutButton.click();
 });
 
