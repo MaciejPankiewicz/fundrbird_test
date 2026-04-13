@@ -1,49 +1,57 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/login.page';
+import { loginData } from '../test-data/login.data';
+import { registerData } from '../test-data/register.data';
+import { GeneralPage } from '../pages/general.page';
+import { RegisterPage } from '../pages/register.page';
+
+test.beforeEach(async ({ page }) => {
+  await page.goto('/');
+});
 
 test('Successful register and login with newly registered user and delete user after it', async ({
   page,
 }) => {
-  await page.goto('/');
-  await page.getByRole('link', { name: ' Get Started Free' }).click();
-  await page.getByTestId('email-input').fill('testrolo@rolnik.xd');
-  await page.getByTestId('display-name-input').fill('Rolnik Jeden');
-  await page.getByTestId('password-input').fill('rolnik123');
-  await page.getByTestId('register-submit-btn').click();
-  await expect(page.locator('.notification-message')).toHaveText(
-    'Registration successful!',
+  const loginPage = new LoginPage(page);
+  const generalPage = new GeneralPage(page);
+  const registerPage = new RegisterPage(page);
+  const registerUserEmail = registerData.registerUserEmail;
+  const registerUserPassword = registerData.registerUserPassword;
+  const registerUserName = registerData.registerUserName;
+  const registrationSuccessMessage =
+    registerData.registrationUserSuccessMessage;
+  const deleteSuccessMessage = registerData.deleteUserSuccessMessage;
+  const deleteConfirmationValue = registerData.deleteConfirmationValue;
+
+  await registerPage.registerUser(
+    registerUserEmail,
+    registerUserName,
+    registerUserPassword,
   );
-  await expect(page.locator('#loginForm')).toBeVisible();
-  await page.getByTestId('email-input').fill('testrolo@rolnik.xd');
-  await page.getByTestId('password-input').fill('rolnik123');
-  await page.getByTestId('login-submit-btn').click();
-  await expect(page.locator('#profileEmail')).toHaveText('testrolo@rolnik.xd');
-  await expect(page.locator('#profileName')).toHaveText('Rolnik Jeden');
-  await expect(page.getByTestId('displayed-name')).toHaveText('Rolnik Jeden');
-  await expect(page.getByTestId('email-value')).toHaveText(
-    'testrolo@rolnik.xd',
-  );
-  await page.getByTestId('delete-account-btn').click();
-  await page.getByTestId('delete-confirmation-input').fill('DELETE');
-  await page.getByTestId('cancel-delete-btn').click();
-  await expect(page.locator('#profileEmail')).toHaveText('testrolo@rolnik.xd');
-  await page.getByTestId('delete-account-btn').click();
-  await page.getByTestId('delete-confirmation-input').fill('DELETE');
-  await page.getByTestId('confirm-delete-btn').click();
-  await expect(page.locator('.notification-message')).toHaveText(
-    'Account deleted successfully',
-  );
+  await expect(generalPage.toastMessage).toHaveText(registrationSuccessMessage);
+  await loginPage.loginUser(registerUserEmail, registerUserPassword);
+  await loginPage.checkLoggedInUser(registerUserEmail, registerUserName);
+  await registerPage.deleteUser(deleteConfirmationValue);
+  await expect(generalPage.toastMessage).toHaveText(deleteSuccessMessage);
 });
 
 test('Unsuccessful user register with already existing user login', async ({
   page,
 }) => {
-  await page.goto('/');
-  await page.getByRole('link', { name: ' Get Started Free' }).click();
-  await page.getByTestId('email-input').fill('demo@example.com');
-  await page.getByTestId('display-name-input').fill('Demo User');
-  await page.getByTestId('password-input').fill('demo123');
-  await page.getByTestId('register-submit-btn').click();
-  await expect(page.locator('.notification-message')).toHaveText(
-    'User with this email already exists',
+  const generalPage = new GeneralPage(page);
+  const registerPage = new RegisterPage(page);
+  const registerUserEmail = loginData.defaultUserEmail;
+  const registerUserPassword = loginData.defaultUserPassword;
+  const registerUserName = loginData.defaultUserName;
+  const registrationUserExistMessage =
+    registerData.registrationUserExistMessage;
+
+  await registerPage.registerUser(
+    registerUserEmail,
+    registerUserName,
+    registerUserPassword,
+  );
+  await expect(generalPage.toastMessage).toHaveText(
+    registrationUserExistMessage,
   );
 });

@@ -7,22 +7,21 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test.only('Successful login with default user', async ({ page }) => {
+test('Successful login with default user', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const generalPage = new GeneralPage(page);
   const defaultUserEmail = loginData.defaultUserEmail;
   const defaultUserPassword = loginData.defaultUserPassword;
   const defaultUserName = loginData.defaultUserName;
 
-  await expect(
-    page.locator('#home-legacy-header').getByText('Rolnopol'),
-  ).toBeVisible();
-  await loginPage.login(defaultUserEmail, defaultUserPassword);
+  await expect(loginPage.homePageHeaderDisplay).toBeVisible();
+  await loginPage.signInLink.click();
+  await loginPage.loginUser(defaultUserEmail, defaultUserPassword);
   await loginPage.checkLoggedInUser(defaultUserEmail, defaultUserName);
   await generalPage.logoutButton.click();
 });
 
-test.only('Unsuccessful login with default user with incorrect password', async ({
+test('Unsuccessful login with default user with incorrect password', async ({
   page,
 }) => {
   const loginPage = new LoginPage(page);
@@ -31,6 +30,7 @@ test.only('Unsuccessful login with default user with incorrect password', async 
   const incorrectPassword = loginData.incorrectPassword;
   const invalidCredentials = loginData.invalidCredentials;
 
-  await loginPage.login(defaultUserEmail, incorrectPassword);
+  await loginPage.signInLink.click();
+  await loginPage.loginUser(defaultUserEmail, incorrectPassword);
   await expect(generalPage.toastMessage).toHaveText(invalidCredentials);
 });
