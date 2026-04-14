@@ -2,6 +2,46 @@
 
 # 🌾 Rolnopol – Automated Tests (Playwright)
 
+## 📌 Overview
+
+This project is an automated testing framework designed for API and UI testing using modern tooling.
+It focuses on reliability, maintainability, and separation of environments (development vs test).
+
+The framework supports:
+
+- API testing
+- UI testing (Playwright)
+- Environment-based configuration
+- Authentication flows
+- Reusable page objects and helpers
+
+## ⚙️ Technologies
+
+- Playwright – end-to-end UI and API testing
+- TypeScript – type safety and better maintainability
+- Node.js – runtime environment
+- dotenv – environment variable management
+- Jest-style assertions (Playwright expect) – assertions
+
+## 🏗️ Architectural Decisions
+
+### Page Object Model (POM)
+
+UI tests are structured using Page Object Model:
+
+- pages/ contains reusable page classes
+- test logic is separated from selectors
+
+### Environment-based configuration
+
+Environment-based configuration
+
+The project uses .env files:
+
+- .env.test – test environment
+- .env.prod – prod environment
+- process.env – runtime config
+
 ## 🚀 Requirements
 
 Before getting started, make sure you have installed:
@@ -20,7 +60,7 @@ Check versions:
 
 git clone https://github.com/MaciejPankiewicz/fundrbird_test.git
 
-## ▶️ Running Tests
+## ▶️ How to Run Tests
 
 ### 🔹 All tests
 
@@ -37,3 +77,29 @@ npx playwright test --ui
 ### 🔹 Run a specific test
 
 npx playwright test tests/test_name.spec.ts
+
+## 📁 Project Structure
+
+```
+project-root/
+│
+├── tests/ # Test files (UI + API)
+│   ├── login.spec.ts
+│   ├── api.spec.ts
+│   └── register.spec.ts
+│
+├── pages/ # Page Object Models
+│   ├── general.page.ts
+│   ├── login.page.ts
+│   └── register.page.ts
+│
+├── test-data/ # Test data
+│   ├── login.data.ts
+│   └── register.data.ts
+│
+├── playwright.config.ts # Playwright configuration
+├── .env.test # Test environment variables
+├── .env.prod # Prod environment variables
+├── package.json
+└── README.md
+```
