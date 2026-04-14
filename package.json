@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "test exercise\r app: https://github.com/jaktestowac/rolnopol",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:1worker": "playwright test --workers=1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

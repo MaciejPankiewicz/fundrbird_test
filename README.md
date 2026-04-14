@@ -65,10 +65,12 @@ git clone https://github.com/MaciejPankiewicz/fundrbird_test.git
 ### 🔹 All tests
 
 npx playwright test
+npm run test
 
 ### 🔹 All tests (headed mode – with visible browser)
 
 npx playwright test --headed
+npm run test:headed
 
 ### 🔹 UI mode (interactive)
 
@@ -94,8 +96,9 @@ project-root/
 │   └── register.page.ts
 │
 ├── test-data/ # Test data
-│   ├── login.data.ts
-│   └── register.data.ts
+│   ├── messages.data.ts
+│   ├── users.data.ts
+│   └── misc.data.ts
 │
 ├── playwright.config.ts # Playwright configuration
 ├── .env.test # Test environment variables

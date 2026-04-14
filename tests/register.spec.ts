@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login.page';
-import { loginData } from '../test-data/login.data';
-import { registerData } from '../test-data/register.data';
+import { authMessages, accountMessages } from '../test-data/messages.data.ts';
+import { registerUser } from '../test-data/users.data.ts';
+import { misc } from '../test-data/misc.data.ts';
 import { GeneralPage } from '../pages/general.page';
 import { RegisterPage } from '../pages/register.page';
 import dotenv from 'dotenv';
@@ -18,13 +19,12 @@ test('Successful register and login with newly registered user and delete user a
   const loginPage = new LoginPage(page);
   const generalPage = new GeneralPage(page);
   const registerPage = new RegisterPage(page);
-  const registerUserEmail = registerData.registerUserEmail;
-  const registerUserPassword = registerData.registerUserPassword;
-  const registerUserName = registerData.registerUserName;
-  const registrationSuccessMessage =
-    registerData.registrationUserSuccessMessage;
-  const deleteSuccessMessage = registerData.deleteUserSuccessMessage;
-  const deleteConfirmationValue = registerData.deleteConfirmationValue;
+  const registerUserEmail = registerUser.email;
+  const registerUserPassword = registerUser.password;
+  const registerUserName = registerUser.name;
+  const registrationSuccessMessage = authMessages.registrationSuccess;
+  const deleteSuccessMessage = accountMessages.deleteUserSuccess;
+  const deleteConfirmationValue = misc.deleteConfirmationValue;
 
   await registerPage.registerUser(
     registerUserEmail,
@@ -46,8 +46,7 @@ test('Unsuccessful user register with already existing user login', async ({
   const registerUserEmail = process.env.TEST_USER_EMAIL!;
   const registerUserPassword = process.env.TEST_USER_PASSWORD!;
   const registerUserName = process.env.TEST_USER_NAME!;
-  const registrationUserExistMessage =
-    registerData.registrationUserExistMessage;
+  const registrationUserExistMessage = authMessages.userAlreadyExists;
 
   await registerPage.registerUser(
     registerUserEmail,

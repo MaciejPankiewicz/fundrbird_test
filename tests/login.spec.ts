@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login.page';
-import { loginData } from '../test-data/login.data';
+import { authMessages } from '../test-data/messages.data.ts';
+import { defaultUser } from '../test-data/users.data.ts';
 import { GeneralPage } from '../pages/general.page';
 import dotenv from 'dotenv';
 
@@ -30,10 +31,10 @@ test('Unsuccessful login with default user with incorrect password', async ({
   const loginPage = new LoginPage(page);
   const generalPage = new GeneralPage(page);
   const defaultUserEmail = process.env.TEST_USER_EMAIL!;
-  const incorrectPassword = loginData.incorrectPassword;
-  const invalidCredentials = loginData.invalidCredentials;
+  const incorrectPassword = defaultUser.incorrectPassword;
+  const invalidCredentialsMessage = authMessages.invalidUserCredentials;
 
   await loginPage.signInLink.click();
   await loginPage.loginUser(defaultUserEmail, incorrectPassword);
-  await expect(generalPage.toastMessage).toHaveText(invalidCredentials);
+  await expect(generalPage.toastMessage).toHaveText(invalidCredentialsMessage);
 });
