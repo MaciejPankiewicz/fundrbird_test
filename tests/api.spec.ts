@@ -1,21 +1,27 @@
 import { test, expect, request } from '@playwright/test';
-import { loginData } from '../test-data/login.data';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env.prod' });
 
 test.only('API test with authentication and user actions', async ({
   request,
 }) => {
-  const loginResponse = await request.post(
-    'http://localhost:3000/api/v1/login',
-    {
-      data: {
-        email: loginData.defaultUserEmail,
-        password: loginData.defaultUserPassword,
-      },
+  const loginResponse = await request.post(`${process.env.BASE_URL}/login`, {
+    data: {
+      email: process.env.TEST_EMAIL,
+      password: process.env.TEST_PASSWORD,
     },
-  );
+  });
+
+  const responseBody = await loginResponse.json();
+
+  if (!loginResponse.ok()) {
+    console.error('API ERROR:');
+    console.error('Status:', loginResponse.status());
+    console.error('Response:', responseBody);
+  }
+
+  console.log('Login success:', responseBody.message);
 
   expect(loginResponse.ok()).toBeTruthy();
-
-  const loginDataResponse = await loginResponse.json();
-  console.log('Login Response:', loginDataResponse.message);
 });
