@@ -1,39 +1,39 @@
 # fundrbird_test
 
-# 🌾 Rolnopol – Automatyczne testy(Playwright)
+# 🌾 Rolnopol – Automated Tests (Playwright)
 
-## 🚀 Wymagania
+## 🚀 Requirements
 
-Przed rozpoczęciem upewnij się, że masz zainstalowane:
+Before getting started, make sure you have installed:
 
 - Node.js (>= 18)
 - npm (>= 8)
 - Git
 
-Sprawdzenie wersji:
+Check versions:
 
 - node -v
 - npm -v
 - git --version
 
-## 📥 Instalacja projektu
+## 📥 Project Installation
 
-git clone https://github.com/jaktestowac/rolnopol
+git clone https://github.com/MaciejPankiewicz/fundrbird_test.git
 
-## ▶️ Uruchamianie testów
+## ▶️ Running Tests
 
-### 🔹 Wszystkie testy
+### 🔹 All tests
 
 npx playwright test
 
-### 🔹 Wszystkie testy headless(z widocznym przebiegiem)
+### 🔹 All tests (headed mode – with visible browser)
 
 npx playwright test --headed
 
-### 🔹 Tryb UI (interaktywny)
+### 🔹 UI mode (interactive)
 
 npx playwright test --ui
 
-### 🔹 Uruchomienie konkretnego testu
+### 🔹 Run a specific test
 
-npx playwright test tests/nazwa_testu.spec.ts
+npx playwright test tests/test_name.spec.ts
