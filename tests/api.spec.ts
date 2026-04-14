@@ -3,13 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.prod' });
 
-test.only('API test with authentication and user actions', async ({
-  request,
-}) => {
+test('API test with authentication and user actions', async ({ request }) => {
   const loginResponse = await request.post(`${process.env.BASE_URL}/login`, {
     data: {
-      email: process.env.TEST_EMAIL,
-      password: process.env.TEST_PASSWORD,
+      email: process.env.TEST_USER_EMAIL,
+      password: process.env.TEST_USER_PASSWORD,
     },
   });
 

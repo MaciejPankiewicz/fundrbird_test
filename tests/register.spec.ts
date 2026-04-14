@@ -4,6 +4,9 @@ import { loginData } from '../test-data/login.data';
 import { registerData } from '../test-data/register.data';
 import { GeneralPage } from '../pages/general.page';
 import { RegisterPage } from '../pages/register.page';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env.prod' });
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
@@ -40,9 +43,9 @@ test('Unsuccessful user register with already existing user login', async ({
 }) => {
   const generalPage = new GeneralPage(page);
   const registerPage = new RegisterPage(page);
-  const registerUserEmail = loginData.defaultUserEmail;
-  const registerUserPassword = loginData.defaultUserPassword;
-  const registerUserName = loginData.defaultUserName;
+  const registerUserEmail = process.env.TEST_USER_EMAIL!;
+  const registerUserPassword = process.env.TEST_USER_PASSWORD!;
+  const registerUserName = process.env.TEST_USER_NAME!;
   const registrationUserExistMessage =
     registerData.registrationUserExistMessage;
 
