@@ -2,7 +2,7 @@
 
 # 🌾 Rolnopol – Automated Tests (Playwright)
 
-App link: https://github.com/jaktestowac/rolnopol.git
+App for tests: `https://github.com/jaktestowac/rolnopol.git`
 
 ## 📌 Overview
 
@@ -54,34 +54,37 @@ Before getting started, make sure you have installed:
 
 Check versions:
 
-- node -v
-- npm -v
-- git --version
+- `node -v`
+- `npm -v`
+- `git --version`
 
 ## 📥 Project Installation
 
-git clone https://github.com/MaciejPankiewicz/fundrbird_test.git
+`git clone https://github.com/MaciejPankiewicz/fundrbird_test.git`
 
 ## ▶️ How to Run Tests
 
 ### 🔹 All tests
 
-npx playwright test
-npm run test
+`npx playwright test`  
+ or  
+`npm run test`
 
 ### 🔹 All tests (headed mode – with visible browser)
 
-npx playwright test --headed
-npm run test:headed
-npm run test:1worker -all tests on 1 worker("serial tests")
+`npx playwright test --headed`  
+ or  
+`npm run test:headed`  
+ or  
+`npm run test:1worker` -all tests on 1 worker("serial tests")
 
 ### 🔹 UI mode (interactive)
 
-npx playwright test --ui
+`npx playwright test --ui`
 
 ### 🔹 Run a specific test
 
-npx playwright test tests/test_name.spec.ts
+`npx playwright test tests/test_name.spec.ts`
 
 ## 📁 Project Structure
 
