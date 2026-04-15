@@ -9,9 +9,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test.only('Update profile information and validate changes', async ({
-  page,
-}) => {
+test('Update profile information and validate changes', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const generalPage = new GeneralPage(page);
   const profilePage = new ProfilePage(page);

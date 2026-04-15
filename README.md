@@ -2,6 +2,8 @@
 
 # 🌾 Rolnopol – Automated Tests (Playwright)
 
+App link: https://github.com/jaktestowac/rolnopol.git
+
 ## 📌 Overview
 
 This project is an automated testing framework designed for API and UI testing using modern tooling.
