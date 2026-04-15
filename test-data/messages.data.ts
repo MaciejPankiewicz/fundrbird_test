@@ -6,4 +6,5 @@ export const authMessages = {
 
 export const accountMessages = {
   deleteUserSuccess: 'Account deleted successfully',
+  profileUpdateSuccess: 'Profile information updated',
 };

@@ -71,6 +71,7 @@ npm run test
 
 npx playwright test --headed
 npm run test:headed
+npm run test:1worker -all tests on 1 worker("serial tests")
 
 ### 🔹 UI mode (interactive)
 

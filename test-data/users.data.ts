@@ -10,3 +10,15 @@ export const registerUser = {
   password: 'rolnik123',
   name: 'Rolnik Jeden',
 };
+
+export const defaultUser2 = {
+  email: 'john.doe@example.com',
+  password: 'johndoe123',
+  name: 'John Doe',
+};
+
+export const updatedUser = {
+  email: 'john.doer@example.com',
+  password: 'johndoe123',
+  name: 'John Doer',
+};
