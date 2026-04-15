@@ -13,23 +13,24 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test('Successful register and login with newly registered user and delete user after it', async ({
+test.only('Successful register and login with newly registered user and delete user after it', async ({
   page,
 }) => {
   const loginPage = new LoginPage(page);
   const generalPage = new GeneralPage(page);
   const registerPage = new RegisterPage(page);
+  const email = `user-${crypto.randomUUID()}@test.com`;
 
   await registerPage.registerUser(
-    registerUser.email,
+    email,
     registerUser.name,
     registerUser.password,
   );
   await expect(generalPage.toastMessage).toHaveText(
     authMessages.registrationSuccess,
   );
-  await loginPage.loginUser(registerUser.email, registerUser.password);
-  await loginPage.checkLoggedInUser(registerUser.email, registerUser.name);
+  await loginPage.loginUser(email, registerUser.password);
+  await loginPage.checkLoggedInUser(email, registerUser.name);
   await registerPage.deleteUser(misc.deleteConfirmationValue);
   await expect(generalPage.toastMessage).toHaveText(
     accountMessages.deleteUserSuccess,
