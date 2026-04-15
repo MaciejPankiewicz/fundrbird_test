@@ -6,6 +6,8 @@ App for tests: `https://github.com/jaktestowac/rolnopol.git`
 
 ## 📌 Overview
 
+In this project, I try to demonstrate different approaches to exploring various subjects.
+
 This project is an automated testing framework designed for API and UI testing using modern tooling.
 It focuses on reliability, maintainability, and separation of environments (development vs test).
 

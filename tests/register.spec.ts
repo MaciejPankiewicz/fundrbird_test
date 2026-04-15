@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test.only('Successful register and login with newly registered user and delete user after it', async ({
+test('Successful register and login with newly registered user and delete user after it', async ({
   page,
 }) => {
   const loginPage = new LoginPage(page);
