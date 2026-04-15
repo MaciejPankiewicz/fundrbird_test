@@ -23,12 +23,6 @@ jobs:
           cd app
           npm ci
 
-      - name: Wait for app
-        run: npx --yes wait-on http://127.0.0.1:3000
-
-      - name: Show app logs
-        run: cat app/app.log
-
       - name: Install test deps
         run: npm ci
 
