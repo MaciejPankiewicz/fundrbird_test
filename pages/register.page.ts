@@ -1,6 +1,7 @@
 import { Page, Locator } from '@playwright/test';
+import { BasePage } from './base.page';
 
-export class RegisterPage {
+export class RegisterPage extends BasePage {
   registerLink: Locator;
   registerEmail: Locator;
   registerDisplayName: Locator;
@@ -11,7 +12,8 @@ export class RegisterPage {
   cancelDeleteButton: Locator;
   confirmDeleteButton: Locator;
 
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.registerLink = this.page.getByRole('link', {
       name: ' Get Started Free',
     });
@@ -28,18 +30,18 @@ export class RegisterPage {
   }
 
   async registerUser(email: string, name: string, password: string) {
-    await this.registerLink.click();
-    await this.registerEmail.fill(email);
-    await this.registerDisplayName.fill(name);
-    await this.registerPassword.fill(password);
-    await this.registerSubmitButton.click();
+    await this.click(this.registerLink);
+    await this.fill(this.registerEmail, email);
+    await this.fill(this.registerDisplayName, name);
+    await this.fill(this.registerPassword, password);
+    await this.click(this.registerSubmitButton);
   }
   async deleteUser(confirmation: string) {
-    await this.deleteAccountButton.click();
-    await this.delteConfirmationInput.fill(confirmation);
-    await this.cancelDeleteButton.click();
-    await this.deleteAccountButton.click();
-    await this.delteConfirmationInput.fill(confirmation);
-    await this.confirmDeleteButton.click();
+    await this.click(this.deleteAccountButton);
+    await this.fill(this.delteConfirmationInput, confirmation);
+    await this.click(this.cancelDeleteButton);
+    await this.click(this.deleteAccountButton);
+    await this.fill(this.delteConfirmationInput, confirmation);
+    await this.click(this.confirmDeleteButton);
   }
 }

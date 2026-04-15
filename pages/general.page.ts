@@ -1,10 +1,12 @@
 import { Page, Locator } from '@playwright/test';
+import { BasePage } from './base.page';
 
-export class GeneralPage {
+export class GeneralPage extends BasePage {
   logoutButton: Locator;
   toastMessage: Locator;
 
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.logoutButton = this.page
       .getByTestId('profile-header')
       .getByTestId('logout-btn');

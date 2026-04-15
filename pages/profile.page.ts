@@ -1,12 +1,14 @@
 import { Page, Locator } from '@playwright/test';
+import { BasePage } from './base.page';
 
-export class ProfilePage {
+export class ProfilePage extends BasePage {
   editProfileButton: Locator;
   nameEditInput: Locator;
   mailEditInput: Locator;
   saveProfileButton: Locator;
 
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.nameEditInput = this.page.locator('#inlineDisplayedName');
     this.mailEditInput = this.page.locator('#inlineEmail');
     this.saveProfileButton = this.page.getByTestId('edit-profile-save');
@@ -14,9 +16,9 @@ export class ProfilePage {
   }
 
   async editProfile(name: string, email: string) {
-    await this.editProfileButton.click();
-    await this.nameEditInput.fill(name);
-    await this.mailEditInput.fill(email);
-    await this.saveProfileButton.click();
+    await this.click(this.editProfileButton);
+    await this.fill(this.nameEditInput, name);
+    await this.fill(this.mailEditInput, email);
+    await this.click(this.saveProfileButton);
   }
 }
