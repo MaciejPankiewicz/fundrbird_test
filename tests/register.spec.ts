@@ -19,23 +19,21 @@ test('Successful register and login with newly registered user and delete user a
   const loginPage = new LoginPage(page);
   const generalPage = new GeneralPage(page);
   const registerPage = new RegisterPage(page);
-  const registerUserEmail = registerUser.email;
-  const registerUserPassword = registerUser.password;
-  const registerUserName = registerUser.name;
-  const registrationSuccessMessage = authMessages.registrationSuccess;
-  const deleteSuccessMessage = accountMessages.deleteUserSuccess;
-  const deleteConfirmationValue = misc.deleteConfirmationValue;
 
   await registerPage.registerUser(
-    registerUserEmail,
-    registerUserName,
-    registerUserPassword,
+    registerUser.email,
+    registerUser.name,
+    registerUser.password,
   );
-  await expect(generalPage.toastMessage).toHaveText(registrationSuccessMessage);
-  await loginPage.loginUser(registerUserEmail, registerUserPassword);
-  await loginPage.checkLoggedInUser(registerUserEmail, registerUserName);
-  await registerPage.deleteUser(deleteConfirmationValue);
-  await expect(generalPage.toastMessage).toHaveText(deleteSuccessMessage);
+  await expect(generalPage.toastMessage).toHaveText(
+    authMessages.registrationSuccess,
+  );
+  await loginPage.loginUser(registerUser.email, registerUser.password);
+  await loginPage.checkLoggedInUser(registerUser.email, registerUser.name);
+  await registerPage.deleteUser(misc.deleteConfirmationValue);
+  await expect(generalPage.toastMessage).toHaveText(
+    accountMessages.deleteUserSuccess,
+  );
 });
 
 test('Unsuccessful user register with already existing user login', async ({
@@ -46,7 +44,6 @@ test('Unsuccessful user register with already existing user login', async ({
   const registerUserEmail = process.env.TEST_USER_EMAIL!;
   const registerUserPassword = process.env.TEST_USER_PASSWORD!;
   const registerUserName = process.env.TEST_USER_NAME!;
-  const registrationUserExistMessage = authMessages.userAlreadyExists;
 
   await registerPage.registerUser(
     registerUserEmail,
@@ -54,6 +51,6 @@ test('Unsuccessful user register with already existing user login', async ({
     registerUserPassword,
   );
   await expect(generalPage.toastMessage).toHaveText(
-    registrationUserExistMessage,
+    authMessages.userAlreadyExists,
   );
 });

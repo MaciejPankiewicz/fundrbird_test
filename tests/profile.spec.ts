@@ -20,16 +20,18 @@ test.only('Update profile information and validate changes', async ({
   await loginPage.loginUser(defaultUser2.email, defaultUser2.password);
   await loginPage.checkLoggedInUser(defaultUser2.email, defaultUser2.name);
   await profilePage.editProfile(updatedUser.name, updatedUser.email);
-  // await expect(generalPage.toastMessage).toHaveText(
-  //   profileUpdateSuccessMessage,
-  // );
+  await page.waitForLoadState('networkidle');
+  await expect(generalPage.toastMessage).toHaveText(
+    accountMessages.profileUpdateSuccess,
+  );
   await generalPage.logoutButton.click();
   await loginPage.loginUser(updatedUser.email, updatedUser.password);
   await loginPage.checkLoggedInUser(updatedUser.email, updatedUser.name);
   await profilePage.editProfile(defaultUser2.name, defaultUser2.email);
-  // await expect(generalPage.toastMessage).toHaveText(
-  //   accountMessages.profileUpdateSuccess,
-  // );
+  await page.waitForLoadState('networkidle');
+  await expect(generalPage.toastMessage).toHaveText(
+    accountMessages.profileUpdateSuccess,
+  );
 
   await generalPage.logoutButton.click();
 });
