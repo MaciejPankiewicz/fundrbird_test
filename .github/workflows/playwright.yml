@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Playwright Tests Rolnopol
 
 on:
   workflow_dispatch:
@@ -22,11 +22,6 @@ jobs:
         run: |
           cd app
           npm ci
-
-      - name: Start app
-        run: |
-          cd app
-          npm run start > app.log 2>&1 &
 
       - name: Wait for app
         run: npx --yes wait-on http://127.0.0.1:3000
