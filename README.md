@@ -88,6 +88,10 @@ Check versions:
 
 `npx playwright test tests/test_name.spec.ts`
 
+### 🔹 Run from github actions
+
+- tests can be launched manually from github actions -> workflows
+
 ## 📁 Project Structure
 
 ```
